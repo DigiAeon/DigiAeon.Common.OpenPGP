@@ -48,6 +48,6 @@ jobs:
         shell: powershell
         run: |
           .\.sonar\scanner\dotnet-sonarscanner begin /k:"DigiAeon_DigiAeon.Common.OpenPGP" /o:"digiaeon" /d:sonar.token="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io"
-          nuget restore DigiAeon_DigiAeon.Common.OpenPGP.sln
-          msbuild DigiAeon_DigiAeon.Common.OpenPGP.sln /t:Rebuild /p:Configuration=Release
+          nuget restore DigiAeon.Common.OpenPGP.sln
+          msbuild DigiAeon.Common.OpenPGP.sln /t:Rebuild /p:Configuration=Release
           .\.sonar\scanner\dotnet-sonarscanner end /d:sonar.token="${{ secrets.SONAR_TOKEN }}"
