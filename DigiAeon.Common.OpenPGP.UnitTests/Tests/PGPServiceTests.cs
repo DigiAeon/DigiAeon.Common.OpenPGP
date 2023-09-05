@@ -5,7 +5,7 @@ using DigiAeon.Common.OpenPGP.UnitTests.Shared;
 
 namespace DigiAeon.Common.OpenPGP.UnitTests
 {
-    public class PGPServiceTests : SetupTeardownTestBase
+    public class PgpServiceTests : SetupTeardownTestBase
     {
         #region -- EncryptFileAndSign --
 
