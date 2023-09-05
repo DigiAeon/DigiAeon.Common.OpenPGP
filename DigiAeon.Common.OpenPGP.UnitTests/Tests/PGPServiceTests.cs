@@ -51,11 +51,11 @@ namespace DigiAeon.Common.OpenPGP.UnitTests
         public void EncryptFileAndSign_InvalidRequiredArgumentWillThrowException(EncryptFileAndSignInvalidRequiredArgumentDataDetails data)
         {
             // Arrange
-            var encryptByPublicKeyPath = data.EncryptByPublicKeyPath;
-            var signByPrivateKeyPath = data.SignByPrivateKeyPath;
+            string encryptByPublicKeyPath = data.EncryptByPublicKeyPath ?? string.Empty;
+            string signByPrivateKeyPath = data.SignByPrivateKeyPath ?? string.Empty;
             string signByPrivateKeyPassPhrase = string.Empty;
-            var inputFilePath = data.InputFilePath;
-            var outputFilePath = data.OutputFilePath;
+            string inputFilePath = data.InputFilePath ?? string.Empty;
+            string outputFilePath = data.OutputFilePath ?? string.Empty;
 
             // Act & Assert
             IPGPService pgpService = new PGPService();
@@ -146,11 +146,11 @@ namespace DigiAeon.Common.OpenPGP.UnitTests
         public async Task EncryptFileAndSignAsync_InvalidRequiredArgumentWillThrowException(EncryptFileAndSignInvalidRequiredArgumentDataDetails data)
         {
             // Arrange
-            var encryptByPublicKeyPath = data.EncryptByPublicKeyPath;
-            var signByPrivateKeyPath = data.SignByPrivateKeyPath;
+            string encryptByPublicKeyPath = data.EncryptByPublicKeyPath ?? string.Empty;
+            string signByPrivateKeyPath = data.SignByPrivateKeyPath ?? string.Empty;
             string signByPrivateKeyPassPhrase = string.Empty;
-            var inputFilePath = data.InputFilePath;
-            var outputFilePath = data.OutputFilePath;
+            string inputFilePath = data.InputFilePath ?? string.Empty;
+            string outputFilePath = data.OutputFilePath ?? string.Empty;
             var tokenSource = new CancellationTokenSource(Constants.ExpectedTimeoutInMillisecond);
 
             // Act & Assert
@@ -224,11 +224,11 @@ namespace DigiAeon.Common.OpenPGP.UnitTests
         public void DecryptFileAndVerify_InvalidRequiredArgumentWillThrowException(DecryptFileAndVerifyInvalidRequiredArgumentDataDetails data)
         {
             // Arrange
-            var verifyByPublicKeyPath = data.VerifyPublicKeyPath;
-            var decryptByPrivateKeyPath = data.DecryptByPrivateKeyPath;
+            string verifyByPublicKeyPath = data.VerifyPublicKeyPath ?? string.Empty;
+            string decryptByPrivateKeyPath = data.DecryptByPrivateKeyPath ?? string.Empty;
             string decryptByPrivateKeyPassPhrase = string.Empty;
-            var inputFilePath = data.InputFilePath;
-            var outputFilePath = data.OutputFilePath;
+            string inputFilePath = data.InputFilePath ?? string.Empty;
+            string outputFilePath = data.OutputFilePath ?? string.Empty;
 
             // Act & Assert
             IPGPService pgpService = new PGPService();
@@ -322,11 +322,11 @@ namespace DigiAeon.Common.OpenPGP.UnitTests
         public async Task DecryptFileAndVerifyAsync_InvalidRequiredArgumentWillThrowException(DecryptFileAndVerifyInvalidRequiredArgumentDataDetails data)
         {
             // Arrange
-            var verifyByPublicKeyPath = data.VerifyPublicKeyPath;
-            var decryptByPrivateKeyPath = data.DecryptByPrivateKeyPath;
+            string verifyByPublicKeyPath = data.VerifyPublicKeyPath ?? string.Empty;
+            string decryptByPrivateKeyPath = data.DecryptByPrivateKeyPath ?? string.Empty;
             string decryptByPrivateKeyPassPhrase = string.Empty;
-            var inputFilePath = data.InputFilePath;
-            var outputFilePath = data.OutputFilePath;
+            string inputFilePath = data.InputFilePath ?? string.Empty;
+            string outputFilePath = data.OutputFilePath ?? string.Empty;
             var tokenSource = new CancellationTokenSource(Constants.ExpectedTimeoutInMillisecond);
 
             // Act & Assert

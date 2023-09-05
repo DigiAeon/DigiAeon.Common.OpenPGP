@@ -4,12 +4,12 @@ namespace DigiAeon.Common.OpenPGP.UnitTests.Data
 {
     public class EncyrptionDecryptionInvalidKeyDataDetails
     {
-        public string EncryptByPublicKeyPath { get; set; }
-        public string SignByPrivateKeyPath { get; set; }
-        public string SignByPrivateKeyPassPhrase { get; set; }
-        public string VerifyPublicKeyPath { get; set; }
-        public string DecryptByPrivateKeyPath { get; set; }
-        public string DecryptByPrivateKeyPassPhrase { get; set; }
+        public string EncryptByPublicKeyPath { get; set; } = string.Empty;
+        public string SignByPrivateKeyPath { get; set; } = string.Empty;
+        public string SignByPrivateKeyPassPhrase { get; set; } = string.Empty;
+        public string VerifyPublicKeyPath { get; set; } = string.Empty;
+        public string DecryptByPrivateKeyPath { get; set; } = string.Empty;
+        public string DecryptByPrivateKeyPassPhrase { get; set; } = string.Empty;
     }
 
     public class EncyrptionDecryptionInvalidKeyData : TheoryData<EncyrptionDecryptionInvalidKeyDataDetails>

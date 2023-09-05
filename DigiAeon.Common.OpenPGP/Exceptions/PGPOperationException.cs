@@ -2,13 +2,9 @@
 {
     public class PGPOperationException : Exception
     {
-        public string OperationName { get; }
+        public string OperationName { get; } = string.Empty;
 
-        public PGPOperationException() : base()
-        {
-        }
-
-        public PGPOperationException(string message) : base(message)
+        public PGPOperationException(string? message) : base(message)
         {
         }
 

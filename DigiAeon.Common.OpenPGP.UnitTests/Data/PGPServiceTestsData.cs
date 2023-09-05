@@ -7,9 +7,9 @@ namespace DigiAeon.Common.OpenPGP.UnitTests.Data
 
     public class EncryptFileAndSignInvalidDataKeyDetails
     {
-        public string EncryptByPublicKeyPath { get; set; }
-        public string SignByPrivateKeyPath { get; set; }
-        public string SignByPrivateKeyPassPhrase { get; set; }
+        public string EncryptByPublicKeyPath { get; set; } = string.Empty;
+        public string SignByPrivateKeyPath { get; set; } = string.Empty;
+        public string SignByPrivateKeyPassPhrase { get; set; } = string.Empty;
     }
 
     public class EncryptFileAndSignInvalidKeyData : TheoryData<EncryptFileAndSignInvalidDataKeyDetails>
@@ -41,9 +41,9 @@ namespace DigiAeon.Common.OpenPGP.UnitTests.Data
 
     public class EncryptFileAndSignUsingKeyFileBytesInvalidDataKeyDetails
     {
-        public byte[] EncryptByPublicKey { get; set; }
-        public byte[] SignByPrivateKey { get; set; }
-        public string SignByPrivateKeyPassPhrase { get; set; }
+        public byte[]? EncryptByPublicKey { get; set; }
+        public byte[]? SignByPrivateKey { get; set; }
+        public string SignByPrivateKeyPassPhrase { get; set; } = string.Empty;
     }
 
     public class EncryptFileAndSignUsingKeyFileBytesInvalidKeyData : TheoryData<EncryptFileAndSignUsingKeyFileBytesInvalidDataKeyDetails>
@@ -75,10 +75,10 @@ namespace DigiAeon.Common.OpenPGP.UnitTests.Data
 
     public class EncryptFileAndSignInvalidRequiredArgumentDataDetails
     {
-        public string InputFilePath { get; set; }
-        public string OutputFilePath { get; set; }
-        public string EncryptByPublicKeyPath { get; set; }
-        public string SignByPrivateKeyPath { get; set; }
+        public string? InputFilePath { get; set; }
+        public string? OutputFilePath { get; set; }
+        public string? EncryptByPublicKeyPath { get; set; }
+        public string? SignByPrivateKeyPath { get; set; }
     }
 
     public class EncryptFileAndSignInvalidRequiredArgumentData : TheoryData<EncryptFileAndSignInvalidRequiredArgumentDataDetails>
@@ -124,10 +124,10 @@ namespace DigiAeon.Common.OpenPGP.UnitTests.Data
 
     public class EncryptFileAndSignUsingKeyFileBytesInvalidRequiredArgumentDataDetails
     {
-        public string InputFilePath { get; set; }
-        public string OutputFilePath { get; set; }
-        public byte[] EncryptByPublicKey { get; set; }
-        public byte[] SignByPrivateKey { get; set; }
+        public string InputFilePath { get; set; } = string.Empty;
+        public string OutputFilePath { get; set; } = string.Empty;
+        public byte[]? EncryptByPublicKey { get; set; }
+        public byte[]? SignByPrivateKey { get; set; }
     }
 
     public class EncryptFileAndSignUsingKeyFileBytesInvalidRequiredArgumentData : TheoryData<EncryptFileAndSignUsingKeyFileBytesInvalidRequiredArgumentDataDetails>
@@ -170,9 +170,9 @@ namespace DigiAeon.Common.OpenPGP.UnitTests.Data
 
     public class EncryptFileAndSignInvalidFileDataDetails
     {
-        public string InputFilePath { get; set; }
-        public string EncryptByPublicKeyPath { get; set; }
-        public string SignByPrivateKeyPath { get; set; }
+        public string InputFilePath { get; set; } = string.Empty;
+        public string EncryptByPublicKeyPath { get; set; } = string.Empty;
+        public string SignByPrivateKeyPath { get; set; } = string.Empty;
     }
 
     public class EncryptFileAndSignInvalidFileData : TheoryData<EncryptFileAndSignInvalidFileDataDetails>
@@ -204,9 +204,9 @@ namespace DigiAeon.Common.OpenPGP.UnitTests.Data
 
     public class EncryptFileAndSignUsingKeyFileBytesInvalidFileDataDetails
     {
-        public string InputFilePath { get; set; }
-        public byte[] EncryptByPublicKey { get; set; }
-        public byte[] SignByPrivateKey { get; set; }
+        public string InputFilePath { get; set; } = string.Empty;
+        public byte[]? EncryptByPublicKey { get; set; }
+        public byte[]? SignByPrivateKey { get; set; }
     }
 
     public class EncryptFileAndSignUsingKeyFileBytesInvalidFileData : TheoryData<EncryptFileAndSignUsingKeyFileBytesInvalidFileDataDetails>
@@ -228,7 +228,7 @@ namespace DigiAeon.Common.OpenPGP.UnitTests.Data
 
     public class DecryptFileAndVerifyValidDataDetails
     {
-        public string TestEncryptedFilePath { get; set; }
+        public string TestEncryptedFilePath { get; set; } = string.Empty;
     }
 
     public class DecryptFileAndVerifyValidData : TheoryData<DecryptFileAndVerifyValidDataDetails>
@@ -249,10 +249,10 @@ namespace DigiAeon.Common.OpenPGP.UnitTests.Data
 
     public class DecryptFileAndVerifyInvalidDataKeyDetails
     {
-        public string EncyrptedFilePath { get; set; }
-        public string VerifyPublicKeyPath { get; set; }
-        public string DecryptByPrivateKeyPath { get; set; }
-        public string DecryptByPrivateKeyPassPhrase { get; set; }
+        public string EncyrptedFilePath { get; set; } = string.Empty;
+        public string VerifyPublicKeyPath { get; set; } = string.Empty;
+        public string DecryptByPrivateKeyPath { get; set; } = string.Empty;
+        public string DecryptByPrivateKeyPassPhrase { get; set; } = string.Empty;
     }
 
     public class DecryptFileAndVerifyInvalidKeyData : TheoryData<DecryptFileAndVerifyInvalidDataKeyDetails>
@@ -295,10 +295,10 @@ namespace DigiAeon.Common.OpenPGP.UnitTests.Data
 
     public class DecryptFileAndVerifyUsingKeyFileBytesInvalidDataKeyDetails
     {
-        public string EncyrptedFilePath { get; set; }
-        public byte[] VerifyPublicKey { get; set; }
-        public byte[] DecryptByPrivateKey { get; set; }
-        public string DecryptByPrivateKeyPassPhrase { get; set; }
+        public string EncyrptedFilePath { get; set; } = string.Empty;
+        public byte[]? VerifyPublicKey { get; set; }
+        public byte[]? DecryptByPrivateKey { get; set; }
+        public string DecryptByPrivateKeyPassPhrase { get; set; } = string.Empty;
     }
 
     public class DecryptFileAndVerifyUsingKeyFileBytesInvalidKeyData : TheoryData<DecryptFileAndVerifyUsingKeyFileBytesInvalidDataKeyDetails>
@@ -341,10 +341,10 @@ namespace DigiAeon.Common.OpenPGP.UnitTests.Data
 
     public class DecryptFileAndVerifyInvalidRequiredArgumentDataDetails
     {
-        public string InputFilePath { get; set; }
-        public string OutputFilePath { get; set; }
-        public string VerifyPublicKeyPath { get; set; }
-        public string DecryptByPrivateKeyPath { get; set; }
+        public string? InputFilePath { get; set; }
+        public string? OutputFilePath { get; set; }
+        public string? VerifyPublicKeyPath { get; set; }
+        public string? DecryptByPrivateKeyPath { get; set; }
     }
 
     public class DecryptFileAndVerifyInvalidRequiredArgumentData : TheoryData<DecryptFileAndVerifyInvalidRequiredArgumentDataDetails>
@@ -390,10 +390,10 @@ namespace DigiAeon.Common.OpenPGP.UnitTests.Data
 
     public class DecryptFileAndVerifyUsingKeyFileBytesInvalidRequiredArgumentDataDetails
     {
-        public string InputFilePath { get; set; }
-        public string OutputFilePath { get; set; }
-        public byte[] VerifyPublicKey { get; set; }
-        public byte[] DecryptByPrivateKey { get; set; }
+        public string InputFilePath { get; set; } = string.Empty;
+        public string OutputFilePath { get; set; } = string.Empty;
+        public byte[]? VerifyPublicKey { get; set; }
+        public byte[]? DecryptByPrivateKey { get; set; }
     }
 
     public class DecryptFileAndVerifyUsingKeyFileBytesInvalidRequiredArgumentData : TheoryData<DecryptFileAndVerifyUsingKeyFileBytesInvalidRequiredArgumentDataDetails>
@@ -436,9 +436,9 @@ namespace DigiAeon.Common.OpenPGP.UnitTests.Data
 
     public class DecryptFileAndVerifyInvalidFileDataDetails
     {
-        public string InputFilePath { get; set; }
-        public string VerifyPublicKeyPath { get; set; }
-        public string DecryptByPrivateKeyPath { get; set; }
+        public string InputFilePath { get; set; } = string.Empty;
+        public string VerifyPublicKeyPath { get; set; } = string.Empty;
+        public string DecryptByPrivateKeyPath { get; set; } = string.Empty;
     }
 
     public class DecryptFileAndVerifyInvalidFileData : TheoryData<DecryptFileAndVerifyInvalidFileDataDetails>
@@ -470,9 +470,9 @@ namespace DigiAeon.Common.OpenPGP.UnitTests.Data
 
     public class DecryptFileAndVerifyUsingKeyFileBytesInvalidFileDataDetails
     {
-        public string InputFilePath { get; set; }
-        public byte[] VerifyPublicKey { get; set; }
-        public byte[] DecryptByPrivateKey { get; set; }
+        public string InputFilePath { get; set; } = string.Empty;
+        public byte[]? VerifyPublicKey { get; set; }
+        public byte[]? DecryptByPrivateKey { get; set; }
     }
 
     public class DecryptFileAndVerifyUsingKeyFileBytesInvalidFileData : TheoryData<DecryptFileAndVerifyUsingKeyFileBytesInvalidFileDataDetails>

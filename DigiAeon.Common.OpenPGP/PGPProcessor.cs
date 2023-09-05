@@ -30,7 +30,7 @@ namespace DigiAeon.Common.OpenPGP
             _encryptionKeys = encryptionKeys;
         }
 
-        internal static PGPProcessor GetInstance(byte[] publicKey, byte[] privateKey, string passPhrase)
+        internal static PGPProcessor GetInstance(byte[]? publicKey, byte[]? privateKey, string passPhrase)
         {
             return new PGPProcessor(new KeyStores(publicKey, privateKey, passPhrase));
         }
@@ -276,7 +276,7 @@ namespace DigiAeon.Common.OpenPGP
         /// <returns>Output message bytes</returns>
         private byte[] DecryptVerifyAndGetOutputBytes(Stream inputStream)
         {
-            byte[] outputBytes = null;
+            byte[]? outputBytes = null;
             var streamsToClose = new List<Stream>();
 
             try
@@ -305,7 +305,7 @@ namespace DigiAeon.Common.OpenPGP
                 }
 
                 // decrypt the encrypted data using the private key
-                PgpObjectFactory plainTextFactory = null;
+                PgpObjectFactory? plainTextFactory = null;
                 var plainTextStream = publicKeyEncryptedData.GetDataStream(privateKey);
 
                 // Track stream for dispose
@@ -313,9 +313,9 @@ namespace DigiAeon.Common.OpenPGP
 
                 plainTextFactory = new PgpObjectFactory(plainTextStream);
 
-                PgpOnePassSignatureList onePassSignatureList = null;
-                PgpSignatureList signatureList = null;
-                PgpCompressedData compressedData = null;
+                PgpOnePassSignatureList? onePassSignatureList = null;
+                PgpSignatureList? signatureList = null;
+                PgpCompressedData? compressedData = null;
 
                 PgpObject message = plainTextFactory.NextPgpObject();
 
@@ -412,8 +412,8 @@ namespace DigiAeon.Common.OpenPGP
 
         private (PgpPrivateKey privateKey, PgpPublicKeyEncryptedData publicKeyEncryptedData) RetrievePublicKeyEncryptedDataAndPrivateKey(PgpEncryptedDataList encryptedDataList)
         {
-            PgpPrivateKey key = null;
-            PgpPublicKeyEncryptedData data = null;
+            PgpPrivateKey? key = null;
+            PgpPublicKeyEncryptedData? data = null;
 
             foreach (PgpPublicKeyEncryptedData publicKeyED in encryptedDataList.GetEncryptedDataObjects())
             {

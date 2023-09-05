@@ -10,7 +10,7 @@
             }
         }
 
-        public static void ValidateForRequiredArgument(byte[] value, string argumentName)
+        public static void ValidateForRequiredArgument(byte[]? value, string argumentName)
         {
             if (value == null || value.Length <= 0)
             {

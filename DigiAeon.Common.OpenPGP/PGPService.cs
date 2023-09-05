@@ -48,7 +48,7 @@ namespace DigiAeon.Common.OpenPGP
             }
         });
 
-        public void EncryptFileAndSign(string inputFilePath, string outputFilePath, byte[] encryptByPublicKey, byte[] signByPrivateKey, string signByPrivateKeyPassPhrase, bool useASCIIArmor)
+        public void EncryptFileAndSign(string inputFilePath, string outputFilePath, byte[]? encryptByPublicKey, byte[]? signByPrivateKey, string signByPrivateKeyPassPhrase, bool useASCIIArmor)
         {
             ValidateEncryptFileAndSignParameters(inputFilePath, outputFilePath, encryptByPublicKey, signByPrivateKey);
 
@@ -63,7 +63,7 @@ namespace DigiAeon.Common.OpenPGP
             }
         }
 
-        public Task EncryptFileAndSignAsync(string inputFilePath, string outputFilePath, byte[] encryptByPublicKey, byte[] signByPrivateKey, string signByPrivateKeyPassPhrase, bool useASCIIArmor, CancellationToken cancellationToken) => Track(async () =>
+        public Task EncryptFileAndSignAsync(string inputFilePath, string outputFilePath, byte[]? encryptByPublicKey, byte[]? signByPrivateKey, string signByPrivateKeyPassPhrase, bool useASCIIArmor, CancellationToken cancellationToken) => Track(async () =>
         {
             ValidateEncryptFileAndSignParameters(inputFilePath, outputFilePath, encryptByPublicKey, signByPrivateKey);
 
@@ -99,7 +99,7 @@ namespace DigiAeon.Common.OpenPGP
             ValidationHelper.ValidateIfFileExists(signByPrivateKeyFilePath);
         }
 
-        private void ValidateEncryptFileAndSignParameters(string inputFilePath, string outputFilePath, byte[] encryptByPublicKey, byte[] signByPrivateKey)
+        private void ValidateEncryptFileAndSignParameters(string inputFilePath, string outputFilePath, byte[]? encryptByPublicKey, byte[]? signByPrivateKey)
         {
             ValidationHelper.ValidateForRequiredArgument(inputFilePath, nameof(inputFilePath));
             ValidationHelper.ValidateIfFileExists(inputFilePath);
@@ -149,7 +149,7 @@ namespace DigiAeon.Common.OpenPGP
         });
 
 
-        public void DecryptFileAndVerify(string inputFilePath, string outputFilePath, byte[] verifyByPublicKey, byte[] decryptByPrivateKey, string decryptByPrivateKeyPassPhrase)
+        public void DecryptFileAndVerify(string inputFilePath, string outputFilePath, byte[]? verifyByPublicKey, byte[]? decryptByPrivateKey, string decryptByPrivateKeyPassPhrase)
         {
             ValidateDecryptFileAndVerifyParameters(inputFilePath, outputFilePath, verifyByPublicKey, decryptByPrivateKey);
 
@@ -164,7 +164,7 @@ namespace DigiAeon.Common.OpenPGP
             }
         }
 
-        public Task DecryptFileAndVerifyAsync(string inputFilePath, string outputFilePath, byte[] verifyByPublicKey, byte[] decryptByPrivateKey, string decryptByPrivateKeyPassPhrase, CancellationToken cancellationToken) => Track(async () =>
+        public Task DecryptFileAndVerifyAsync(string inputFilePath, string outputFilePath, byte[]? verifyByPublicKey, byte[]? decryptByPrivateKey, string decryptByPrivateKeyPassPhrase, CancellationToken cancellationToken) => Track(async () =>
         {
             ValidateDecryptFileAndVerifyParameters(inputFilePath, outputFilePath, verifyByPublicKey, decryptByPrivateKey);
 
@@ -186,7 +186,7 @@ namespace DigiAeon.Common.OpenPGP
             }
         });
 
-        public Task<Stream> DecryptFileAndVerifyAsync(string inputFilePath, byte[] verifyByPublicKey, byte[] decryptByPrivateKey, string decryptByPrivateKeyPassPhrase, CancellationToken cancellationToken) => Track(async () =>
+        public Task<Stream> DecryptFileAndVerifyAsync(string inputFilePath, byte[]? verifyByPublicKey, byte[]? decryptByPrivateKey, string decryptByPrivateKeyPassPhrase, CancellationToken cancellationToken) => Track(async () =>
         {
             ValidateDecryptFileAndVerifyParameters(inputFilePath, verifyByPublicKey, decryptByPrivateKey);
 
@@ -223,7 +223,7 @@ namespace DigiAeon.Common.OpenPGP
             ValidationHelper.ValidateIfFileExists(decryptByPrivateKeyFilePath);
         }
 
-        private void ValidateDecryptFileAndVerifyParameters(string inputFilePath, string outputFilePath, byte[] verifyByPublicKey, byte[] decryptByPrivateKey)
+        private void ValidateDecryptFileAndVerifyParameters(string inputFilePath, string outputFilePath, byte[]? verifyByPublicKey, byte[]? decryptByPrivateKey)
         {
             ValidationHelper.ValidateForRequiredArgument(inputFilePath, nameof(inputFilePath));
             ValidationHelper.ValidateIfFileExists(inputFilePath);
@@ -235,7 +235,7 @@ namespace DigiAeon.Common.OpenPGP
             ValidationHelper.ValidateForRequiredArgument(decryptByPrivateKey, nameof(decryptByPrivateKey));
         }
 
-        private void ValidateDecryptFileAndVerifyParameters(string inputFilePath, byte[] verifyByPublicKey, byte[] decryptByPrivateKey)
+        private void ValidateDecryptFileAndVerifyParameters(string inputFilePath, byte[]? verifyByPublicKey, byte[]? decryptByPrivateKey)
         {
             ValidationHelper.ValidateForRequiredArgument(inputFilePath, nameof(inputFilePath));
             ValidationHelper.ValidateIfFileExists(inputFilePath);

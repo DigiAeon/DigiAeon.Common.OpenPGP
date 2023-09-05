@@ -22,7 +22,7 @@ namespace DigiAeon.Common.OpenPGP
         /// <param name="privateKey">The key used to sign the data.</param>
         /// <param name="passPhrase">The password required to access the private key</param>
         /// <exception cref="ArgumentException">Public key not found. Private key not found. Missing password</exception>
-        public KeyStores(byte[] publicKey, byte[] privateKey, string passPhrase)
+        public KeyStores(byte[]? publicKey, byte[]? privateKey, string passPhrase)
         {
             if (publicKey == null)
                 throw new ArgumentException(nameof(publicKey));
@@ -70,7 +70,7 @@ namespace DigiAeon.Common.OpenPGP
         /// Return the first key we can use to encrypt.
         /// Note: A file can contain multiple keys (stored in "key rings")
         /// </summary>
-        private PgpSecretKey GetFirstSecretKey(PgpSecretKeyRingBundle secretKeyRingBundle)
+        private PgpSecretKey? GetFirstSecretKey(PgpSecretKeyRingBundle secretKeyRingBundle)
         {
             foreach (PgpSecretKeyRing kRing in secretKeyRingBundle.GetKeyRings())
             {
