@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace DigiAeon.Common.OpenPGP
 {
-    public class PGPService : IPGPService, ITrackingDisposable
+    public class PGPService : IPgpService, ITrackingDisposable
     {
         private bool _disposed;
 

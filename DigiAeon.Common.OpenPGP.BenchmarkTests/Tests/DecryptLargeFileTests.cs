@@ -49,7 +49,7 @@ namespace DigiAeon.Common.OpenPGP.BenchmarkTests.Tests
             var signByPrivateKeyPassPhrase = Constants.DigiAeonPrivateKeyPassPhrase;
             _encyptedFilePath = Path.Combine(Constants.TemporaryDirectory, FileHelper.GenerateUniqueFileName(".txt"));
 
-            IPGPService pgpService = new PGPService();
+            IPgpService pgpService = new PGPService();
 
             Console.WriteLine($"Encrypting {_testFilePath} to {_encyptedFilePath}...");
             pgpService.EncryptFileAndSign(_testFilePath, _encyptedFilePath, encryptByPublicKeyPath, signByPrivateKeyPath, signByPrivateKeyPassPhrase, true);
@@ -76,7 +76,7 @@ namespace DigiAeon.Common.OpenPGP.BenchmarkTests.Tests
             var decryptByPrivateKeyPassPhrase = Constants.VendorPrivateKeyPassPhrase;
             var decryptedFilePath = Path.Combine(Constants.TemporaryDirectory, FileHelper.GenerateUniqueFileName(".txt"));
 
-            IPGPService pgpService = new PGPService();
+            IPgpService pgpService = new PGPService();
 
             Console.WriteLine($"Decrypting {_encyptedFilePath} to {decryptedFilePath}...");
             pgpService.DecryptFileAndVerify(_encyptedFilePath, decryptedFilePath, verifyByPublicKeyPath, decryptByPrivateKeyPath, decryptByPrivateKeyPassPhrase);

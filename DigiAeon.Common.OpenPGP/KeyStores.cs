@@ -31,7 +31,7 @@ namespace DigiAeon.Common.OpenPGP
                 throw new ArgumentException(nameof(privateKey));
 
             if (passPhrase == null)
-                throw new ArgumentNullException("Invalid Pass Phrase.");
+                throw new ArgumentNullException(nameof(passPhrase), "Invalid Pass Phrase.");
 
             var publicKeys = ReadPublicKeys(publicKey);
 
@@ -51,7 +51,7 @@ namespace DigiAeon.Common.OpenPGP
                 return new PgpSecretKeyRingBundle(inputStream);
             }
 
-            throw new ArgumentException("Can't find secret key bundle.");
+            throw new Exception("Can't find secret key bundle.");
         }
 
         private PgpSecretKey ReadSecretKey(PgpSecretKeyRingBundle secretKeys)
@@ -63,7 +63,7 @@ namespace DigiAeon.Common.OpenPGP
                 return key;
             }
 
-            throw new ArgumentException("Can't find signing key in key ring.");
+            throw new Exception("Can't find signing key in key ring.");
         }
 
         /// <summary>
@@ -97,7 +97,7 @@ namespace DigiAeon.Common.OpenPGP
                 return GetPublicKeys(publicKeyRingBundle);
             }
 
-            throw new ArgumentException("No encryption key found in public key ring.");
+            throw new Exception("No encryption key found in public key ring.");
         }
 
         private (PgpPublicKey EncyptionPublicKey, List<PgpPublicKey> VerificationPublicKeys) GetPublicKeys(PgpPublicKeyRingBundle publicKeyRingBundle)
@@ -124,7 +124,7 @@ namespace DigiAeon.Common.OpenPGP
                 return privateKey;
             }
 
-            throw new ArgumentException("No private key found in secret key.");
+            throw new Exception("No private key found in secret key.");
         }
 
         public PgpPrivateKey FindSecretKey(long keyId)
