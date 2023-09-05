@@ -1,5 +1,6 @@
 ﻿using Org.BouncyCastle.Bcpg.OpenPgp;
 using DigiAeon.Common.OpenPGP.Interfaces;
+using DigiAeon.Common.OpenPGP.Exceptions;
 
 namespace DigiAeon.Common.OpenPGP
 {
@@ -51,7 +52,7 @@ namespace DigiAeon.Common.OpenPGP
                 return new PgpSecretKeyRingBundle(inputStream);
             }
 
-            throw new Exception("Can't find secret key bundle.");
+            throw new PGPOperationException("Can't find secret key bundle.");
         }
 
         private PgpSecretKey ReadSecretKey(PgpSecretKeyRingBundle secretKeys)
@@ -63,7 +64,7 @@ namespace DigiAeon.Common.OpenPGP
                 return key;
             }
 
-            throw new Exception("Can't find signing key in key ring.");
+            throw new PGPOperationException("Can't find signing key in key ring.");
         }
 
         /// <summary>
@@ -97,7 +98,7 @@ namespace DigiAeon.Common.OpenPGP
                 return GetPublicKeys(publicKeyRingBundle);
             }
 
-            throw new Exception("No encryption key found in public key ring.");
+            throw new PGPOperationException("No encryption key found in public key ring.");
         }
 
         private (PgpPublicKey EncyptionPublicKey, List<PgpPublicKey> VerificationPublicKeys) GetPublicKeys(PgpPublicKeyRingBundle publicKeyRingBundle)
@@ -124,7 +125,7 @@ namespace DigiAeon.Common.OpenPGP
                 return privateKey;
             }
 
-            throw new Exception("No private key found in secret key.");
+            throw new PGPOperationException("No private key found in secret key.");
         }
 
         public PgpPrivateKey FindSecretKey(long keyId)
