@@ -1,16 +1,11 @@
-﻿using Microsoft.Win32.SafeHandles;
-using DigiAeon.Common.OpenPGP.Exceptions;
+﻿using DigiAeon.Common.OpenPGP.Exceptions;
 using DigiAeon.Common.OpenPGP.Interfaces;
 using DigiAeon.Common.OpenPGP.Shared;
-using System.Runtime.InteropServices;
-using System.Threading.Tasks;
 
 namespace DigiAeon.Common.OpenPGP
 {
-    public class PGPService : IPgpService, ITrackingDisposable
+    public class PgpService : IPgpService
     {
-        private bool _disposed;
-
         public void EncryptFileAndSign(string inputFilePath, string outputFilePath, string encryptByPublicKeyPath, string signByPrivateKeyFilePath, string signByPrivateKeyPassPhrase, bool useASCIIArmor)
         {
             ValidateEncryptFileAndSignParameters(inputFilePath, outputFilePath, encryptByPublicKeyPath, signByPrivateKeyFilePath);
@@ -26,7 +21,7 @@ namespace DigiAeon.Common.OpenPGP
             }
         }
 
-        public Task EncryptFileAndSignAsync(string inputFilePath, string outputFilePath, string encryptByPublicKeyPath, string signByPrivateKeyFilePath, string signByPrivateKeyPassPhrase, bool useASCIIArmor, CancellationToken cancellationToken) => Track(async () =>
+        public async Task EncryptFileAndSignAsync(string inputFilePath, string outputFilePath, string encryptByPublicKeyPath, string signByPrivateKeyFilePath, string signByPrivateKeyPassPhrase, bool useASCIIArmor, CancellationToken cancellationToken)
         {
             ValidateEncryptFileAndSignParameters(inputFilePath, outputFilePath, encryptByPublicKeyPath, signByPrivateKeyFilePath);
 
@@ -46,7 +41,7 @@ namespace DigiAeon.Common.OpenPGP
             {
                 throw new PGPOperationException(nameof(EncryptFileAndSignAsync), ex);
             }
-        });
+        }
 
         public void EncryptFileAndSign(string inputFilePath, string outputFilePath, byte[]? encryptByPublicKey, byte[]? signByPrivateKey, string signByPrivateKeyPassPhrase, bool useASCIIArmor)
         {
@@ -63,7 +58,7 @@ namespace DigiAeon.Common.OpenPGP
             }
         }
 
-        public Task EncryptFileAndSignAsync(string inputFilePath, string outputFilePath, byte[]? encryptByPublicKey, byte[]? signByPrivateKey, string signByPrivateKeyPassPhrase, bool useASCIIArmor, CancellationToken cancellationToken) => Track(async () =>
+        public async Task EncryptFileAndSignAsync(string inputFilePath, string outputFilePath, byte[]? encryptByPublicKey, byte[]? signByPrivateKey, string signByPrivateKeyPassPhrase, bool useASCIIArmor, CancellationToken cancellationToken)
         {
             ValidateEncryptFileAndSignParameters(inputFilePath, outputFilePath, encryptByPublicKey, signByPrivateKey);
 
@@ -83,7 +78,7 @@ namespace DigiAeon.Common.OpenPGP
             {
                 throw new PGPOperationException(nameof(EncryptFileAndSignAsync), ex);
             }
-        });
+        }
 
         private void ValidateEncryptFileAndSignParameters(string inputFilePath, string outputFilePath, string encryptByPublicKeyPath, string signByPrivateKeyFilePath)
         {
@@ -126,7 +121,7 @@ namespace DigiAeon.Common.OpenPGP
             }
         }
 
-        public Task DecryptFileAndVerifyAsync(string inputFilePath, string outputFilePath, string verifyByPublicKeyPath, string decryptByPrivateKeyFilePath, string decryptByPrivateKeyPassPhrase, CancellationToken cancellationToken) => Track(async () =>
+        public async Task DecryptFileAndVerifyAsync(string inputFilePath, string outputFilePath, string verifyByPublicKeyPath, string decryptByPrivateKeyFilePath, string decryptByPrivateKeyPassPhrase, CancellationToken cancellationToken)
         {
             ValidateDecryptFileAndVerifyParameters(inputFilePath, outputFilePath, verifyByPublicKeyPath, decryptByPrivateKeyFilePath);
 
@@ -146,7 +141,7 @@ namespace DigiAeon.Common.OpenPGP
             {
                 throw new PGPOperationException(nameof(DecryptFileAndVerifyAsync), ex);
             }
-        });
+        }
 
 
         public void DecryptFileAndVerify(string inputFilePath, string outputFilePath, byte[]? verifyByPublicKey, byte[]? decryptByPrivateKey, string decryptByPrivateKeyPassPhrase)
@@ -164,7 +159,7 @@ namespace DigiAeon.Common.OpenPGP
             }
         }
 
-        public Task DecryptFileAndVerifyAsync(string inputFilePath, string outputFilePath, byte[]? verifyByPublicKey, byte[]? decryptByPrivateKey, string decryptByPrivateKeyPassPhrase, CancellationToken cancellationToken) => Track(async () =>
+        public async Task DecryptFileAndVerifyAsync(string inputFilePath, string outputFilePath, byte[]? verifyByPublicKey, byte[]? decryptByPrivateKey, string decryptByPrivateKeyPassPhrase, CancellationToken cancellationToken)
         {
             ValidateDecryptFileAndVerifyParameters(inputFilePath, outputFilePath, verifyByPublicKey, decryptByPrivateKey);
 
@@ -184,9 +179,9 @@ namespace DigiAeon.Common.OpenPGP
             {
                 throw new PGPOperationException(nameof(DecryptFileAndVerifyAsync), ex);
             }
-        });
+        }
 
-        public Task<Stream> DecryptFileAndVerifyAsync(string inputFilePath, byte[]? verifyByPublicKey, byte[]? decryptByPrivateKey, string decryptByPrivateKeyPassPhrase, CancellationToken cancellationToken) => Track(async () =>
+        public async Task<Stream> DecryptFileAndVerifyAsync(string inputFilePath, byte[]? verifyByPublicKey, byte[]? decryptByPrivateKey, string decryptByPrivateKeyPassPhrase, CancellationToken cancellationToken)
         {
             ValidateDecryptFileAndVerifyParameters(inputFilePath, verifyByPublicKey, decryptByPrivateKey);
 
@@ -207,7 +202,7 @@ namespace DigiAeon.Common.OpenPGP
             {
                 throw new PGPOperationException(nameof(DecryptFileAndVerifyAsync), ex);
             }
-        });
+        }
 
         private void ValidateDecryptFileAndVerifyParameters(string inputFilePath, string outputFilePath, string verifyByPublicKeyPath, string decryptByPrivateKeyFilePath)
         {
@@ -244,33 +239,5 @@ namespace DigiAeon.Common.OpenPGP
 
             ValidationHelper.ValidateForRequiredArgument(decryptByPrivateKey, nameof(decryptByPrivateKey));
         }
-
-        private readonly TrackingDisposer _disposer;
-
-        public PGPService() => _disposer = new TrackingDisposer(this);
-
-        protected virtual void FinishDispose() { }
-
-        protected virtual Task FinishDisposeAsync()
-        => Task.CompletedTask;
-
-        Task ITrackingDisposable.FinishDisposeAsync()
-        {
-            FinishDispose();
-            return FinishDisposeAsync();
-        }
-
-        public void Dispose()
-        => _disposer.Dispose();
-
-        protected Task Track(Func<Task> func)
-        => _disposer.Track(func, out var result)
-            ? result
-            : throw new ObjectDisposedException(nameof(PGPService));
-
-        protected Task<TResult> Track<TResult>(Func<Task<TResult>> func)
-        => _disposer.Track(func, out var result)
-            ? result
-            : throw new ObjectDisposedException(nameof(PGPService));
     }
 }

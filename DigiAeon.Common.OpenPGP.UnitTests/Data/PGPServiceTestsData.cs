@@ -122,6 +122,55 @@ namespace DigiAeon.Common.OpenPGP.UnitTests.Data
         }
     }
 
+    public class EncryptFileAndSignBytesInvalidRequiredArgumentDataDetails
+    {
+        public string? InputFilePath { get; set; }
+        public string? OutputFilePath { get; set; }
+        public byte[]? EncryptByPublicKey { get; set; }
+        public byte[]? SignByPrivateKey { get; set; }
+    }
+
+    public class EncryptFileAndSignBytesInvalidRequiredArgumentData : TheoryData<EncryptFileAndSignBytesInvalidRequiredArgumentDataDetails>
+    {
+        public EncryptFileAndSignBytesInvalidRequiredArgumentData()
+        {
+            foreach (var emptyString in new[] { "", " ", null })
+            {
+                Add(new EncryptFileAndSignBytesInvalidRequiredArgumentDataDetails
+                {
+                    InputFilePath = emptyString,
+                    OutputFilePath = @"C:\Temp\testoutput.txt",
+                    EncryptByPublicKey = File.ReadAllBytes(Constants.VendorPublicKeyPath),
+                    SignByPrivateKey = File.ReadAllBytes(Constants.DigiAeonPrivateKeyPath)
+                });
+
+                Add(new EncryptFileAndSignBytesInvalidRequiredArgumentDataDetails
+                {
+                    InputFilePath = Constants.TestFilePath,
+                    OutputFilePath = emptyString,
+                    EncryptByPublicKey = File.ReadAllBytes(Constants.VendorPublicKeyPath),
+                    SignByPrivateKey = File.ReadAllBytes(Constants.DigiAeonPrivateKeyPath)
+                });
+
+                Add(new EncryptFileAndSignBytesInvalidRequiredArgumentDataDetails
+                {
+                    InputFilePath = Constants.TestFilePath,
+                    OutputFilePath = @"C:\Temp\testoutput.txt",
+                    EncryptByPublicKey = null,
+                    SignByPrivateKey = File.ReadAllBytes(Constants.DigiAeonPrivateKeyPath)
+                });
+
+                Add(new EncryptFileAndSignBytesInvalidRequiredArgumentDataDetails
+                {
+                    InputFilePath = Constants.TestFilePath,
+                    OutputFilePath = @"C:\Temp\testoutput.txt",
+                    EncryptByPublicKey = File.ReadAllBytes(Constants.VendorPublicKeyPath),
+                    SignByPrivateKey = null
+                });
+            }
+        }
+    }
+
     public class EncryptFileAndSignUsingKeyFileBytesInvalidRequiredArgumentDataDetails
     {
         public string InputFilePath { get; set; } = string.Empty;
@@ -198,6 +247,26 @@ namespace DigiAeon.Common.OpenPGP.UnitTests.Data
                 InputFilePath = Constants.TestFilePath,
                 EncryptByPublicKeyPath = Constants.VendorPublicKeyPath,
                 SignByPrivateKeyPath = Constants.DigiAeonPrivateKeyPath + ".txt"
+            });
+        }
+    }
+
+    public class EncryptFileAndSignBytesInvalidFileDataDetails
+    {
+        public string InputFilePath { get; set; } = string.Empty;
+        public byte[]? EncryptByPublicKey { get; set; }
+        public byte[]? SignByPrivateKey { get; set; }
+    }
+
+    public class EncryptFileAndSignBytesInvalidFileData : TheoryData<EncryptFileAndSignBytesInvalidFileDataDetails>
+    {
+        public EncryptFileAndSignBytesInvalidFileData()
+        {
+            Add(new EncryptFileAndSignBytesInvalidFileDataDetails
+            {
+                InputFilePath = Constants.TestFilePath + ".txt",
+                EncryptByPublicKey = File.ReadAllBytes(Constants.VendorPublicKeyPath),
+                SignByPrivateKey = File.ReadAllBytes(Constants.DigiAeonPrivateKeyPath)
             });
         }
     }
@@ -388,6 +457,55 @@ namespace DigiAeon.Common.OpenPGP.UnitTests.Data
         }
     }
 
+    public class DecryptFileAndVerifyBytesInvalidRequiredArgumentDataDetails
+    {
+        public string? InputFilePath { get; set; }
+        public string? OutputFilePath { get; set; }
+        public byte[]? VerifyPublicKey { get; set; }
+        public byte[]? DecryptByPrivateKey { get; set; }
+    }
+
+    public class DecryptFileAndVerifyBytesInvalidRequiredArgumentData : TheoryData<DecryptFileAndVerifyBytesInvalidRequiredArgumentDataDetails>
+    {
+        public DecryptFileAndVerifyBytesInvalidRequiredArgumentData()
+        {
+            foreach (var emptyString in new[] { "", " ", null })
+            {
+                Add(new DecryptFileAndVerifyBytesInvalidRequiredArgumentDataDetails
+                {
+                    InputFilePath = emptyString,
+                    OutputFilePath = @"C:\Temp\testoutput.txt",
+                    VerifyPublicKey = File.ReadAllBytes(Constants.DigiAeonPublicKeyPath),
+                    DecryptByPrivateKey = File.ReadAllBytes(Constants.VendorPrivateKeyPath)
+                });
+
+                Add(new DecryptFileAndVerifyBytesInvalidRequiredArgumentDataDetails
+                {
+                    InputFilePath = Constants.TestEncryptedFileWithASCIIArmorPath,
+                    OutputFilePath = emptyString,
+                    VerifyPublicKey = File.ReadAllBytes(Constants.DigiAeonPublicKeyPath),
+                    DecryptByPrivateKey = File.ReadAllBytes(Constants.VendorPrivateKeyPath)
+                });
+
+                Add(new DecryptFileAndVerifyBytesInvalidRequiredArgumentDataDetails
+                {
+                    InputFilePath = Constants.TestEncryptedFileWithASCIIArmorPath,
+                    OutputFilePath = @"C:\Temp\testoutput.txt",
+                    VerifyPublicKey = null,
+                    DecryptByPrivateKey = File.ReadAllBytes(Constants.VendorPrivateKeyPath)
+                });
+
+                Add(new DecryptFileAndVerifyBytesInvalidRequiredArgumentDataDetails
+                {
+                    InputFilePath = Constants.TestEncryptedFileWithASCIIArmorPath,
+                    OutputFilePath = @"C:\Temp\testoutput.txt",
+                    VerifyPublicKey = File.ReadAllBytes(Constants.DigiAeonPublicKeyPath),
+                    DecryptByPrivateKey = null
+                });
+            }
+        }
+    }
+
     public class DecryptFileAndVerifyUsingKeyFileBytesInvalidRequiredArgumentDataDetails
     {
         public string InputFilePath { get; set; } = string.Empty;
@@ -464,6 +582,26 @@ namespace DigiAeon.Common.OpenPGP.UnitTests.Data
                 InputFilePath = Constants.TestEncryptedFileWithASCIIArmorPath,
                 VerifyPublicKeyPath = Constants.DigiAeonPublicKeyPath,
                 DecryptByPrivateKeyPath = Constants.VendorPrivateKeyPath + ".txt"
+            });
+        }
+    }
+
+    public class DecryptFileAndVerifyBytesInvalidFileDataDetails
+    {
+        public string InputFilePath { get; set; } = string.Empty;
+        public byte[]? VerifyPublicKey { get; set; }
+        public byte[]? DecryptByPrivateKey { get; set; }
+    }
+
+    public class DecryptFileAndVerifyBytesInvalidFileData : TheoryData<DecryptFileAndVerifyBytesInvalidFileDataDetails>
+    {
+        public DecryptFileAndVerifyBytesInvalidFileData()
+        {
+            Add(new DecryptFileAndVerifyBytesInvalidFileDataDetails
+            {
+                InputFilePath = Constants.TestEncryptedFileWithASCIIArmorPath + ".txt",
+                VerifyPublicKey = File.ReadAllBytes(Constants.DigiAeonPublicKeyPath),
+                DecryptByPrivateKey = File.ReadAllBytes(Constants.VendorPrivateKeyPath)
             });
         }
     }

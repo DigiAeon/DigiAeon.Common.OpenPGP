@@ -27,7 +27,7 @@ namespace DigiAeon.Common.OpenPGP.UnitTests.Tests
             var originalFileEncoding = Constants.TestFileEncoding;
 
             // Act
-            IPgpService pgpService = new PGPService();
+            IPgpService pgpService = new PgpService();
             pgpService.EncryptFileAndSign(originalFilePath, encyptedFilePath, encryptByPublicKeyPath, signByPrivateKeyPath, signByPrivateKeyPassPhrase, useASCIIArmor);
             pgpService.DecryptFileAndVerify(encyptedFilePath, decryptedFilePath, verifyByPublicKeyPath, decryptByPrivateKeyPath, decryptByPrivateKeyPassPhrase);
 
@@ -54,7 +54,7 @@ namespace DigiAeon.Common.OpenPGP.UnitTests.Tests
             var originalFileEncoding = Constants.TestFileEncoding;
 
             // Act & Assert
-            IPgpService pgpService = new PGPService();
+            IPgpService pgpService = new PgpService();
             Assert.Throws<PGPOperationException>(() =>
             {
                 pgpService.EncryptFileAndSign(originalFilePath, encyptedFilePath, encryptByPublicKeyPath, signByPrivateKeyPath, signByPrivateKeyPassPhrase, true);
@@ -83,7 +83,7 @@ namespace DigiAeon.Common.OpenPGP.UnitTests.Tests
             var tokenSource = new CancellationTokenSource(Constants.ExpectedTimeoutInMillisecond);
 
             // Act
-            IPgpService pgpService = new PGPService();
+            IPgpService pgpService = new PgpService();
             await pgpService.EncryptFileAndSignAsync(originalFilePath, encyptedFilePath, encryptByPublicKeyPath, signByPrivateKeyPath, signByPrivateKeyPassPhrase, useASCIIArmor, tokenSource.Token);
             await pgpService.DecryptFileAndVerifyAsync(encyptedFilePath, decryptedFilePath, verifyByPublicKeyPath, decryptByPrivateKeyPath, decryptByPrivateKeyPassPhrase, tokenSource.Token);
 
@@ -112,7 +112,7 @@ namespace DigiAeon.Common.OpenPGP.UnitTests.Tests
             var tokenSource = new CancellationTokenSource(Constants.ExpectedTimeoutInMillisecond);
 
             // Act & Assert
-            IPgpService pgpService = new PGPService();
+            IPgpService pgpService = new PgpService();
             await Assert.ThrowsAsync<PGPOperationException>(async () =>
             {
                 await pgpService.EncryptFileAndSignAsync(originalFilePath, encyptedFilePath, encryptByPublicKeyPath, signByPrivateKeyPath, signByPrivateKeyPassPhrase, true, tokenSource.Token);
@@ -140,7 +140,7 @@ namespace DigiAeon.Common.OpenPGP.UnitTests.Tests
             var originalFileEncoding = Constants.TestFileEncoding;
 
             // Act
-            IPgpService pgpService = new PGPService();
+            IPgpService pgpService = new PgpService();
             pgpService.EncryptFileAndSign(originalFilePath, encyptedFilePath, encryptByPublicKey, signByPrivateKey, signByPrivateKeyPassPhrase, useASCIIArmor);
             pgpService.DecryptFileAndVerify(encyptedFilePath, decryptedFilePath, verifyByPublicKey, decryptByPrivateKey, decryptByPrivateKeyPassPhrase);
 
@@ -167,7 +167,7 @@ namespace DigiAeon.Common.OpenPGP.UnitTests.Tests
             var originalFileEncoding = Constants.TestFileEncoding;
 
             // Act & Assert
-            IPgpService pgpService = new PGPService();
+            IPgpService pgpService = new PgpService();
             Assert.Throws<PGPOperationException>(() =>
             {
                 pgpService.EncryptFileAndSign(originalFilePath, encyptedFilePath, encryptByPublicKey, signByPrivateKey, signByPrivateKeyPassPhrase, true);
@@ -196,7 +196,7 @@ namespace DigiAeon.Common.OpenPGP.UnitTests.Tests
             var tokenSource = new CancellationTokenSource(Constants.ExpectedTimeoutInMillisecond);
 
             // Act
-            IPgpService pgpService = new PGPService();
+            IPgpService pgpService = new PgpService();
             await pgpService.EncryptFileAndSignAsync(originalFilePath, encyptedFilePath, encryptByPublicKey, signByPrivateKey, signByPrivateKeyPassPhrase, useASCIIArmor, tokenSource.Token);
             await pgpService.DecryptFileAndVerifyAsync(encyptedFilePath, decryptedFilePath, verifyByPublicKey, decryptByPrivateKey, decryptByPrivateKeyPassPhrase, tokenSource.Token);
 
@@ -225,7 +225,7 @@ namespace DigiAeon.Common.OpenPGP.UnitTests.Tests
             var tokenSource = new CancellationTokenSource(Constants.ExpectedTimeoutInMillisecond);
 
             // Act & Assert
-            IPgpService pgpService = new PGPService();
+            IPgpService pgpService = new PgpService();
             await Assert.ThrowsAsync<PGPOperationException>(async () =>
             {
                 await pgpService.EncryptFileAndSignAsync(originalFilePath, encyptedFilePath, encryptByPublicKey, signByPrivateKey, signByPrivateKeyPassPhrase, true, tokenSource.Token);

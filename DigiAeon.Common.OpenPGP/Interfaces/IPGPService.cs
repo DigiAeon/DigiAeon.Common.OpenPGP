@@ -1,6 +1,6 @@
 ﻿namespace DigiAeon.Common.OpenPGP.Interfaces
 {
-    public interface IPgpService : IDisposable
+    public interface IPgpService
     {
         void EncryptFileAndSign(string inputFilePath, string outputFilePath, string encryptByPublicKeyFilePath, string signByPrivateKeyFilePath, string signByPrivateKeyPassPhrase, bool useASCIIArmor);
 
