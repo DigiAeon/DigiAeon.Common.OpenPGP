@@ -579,15 +579,14 @@ namespace DigiAeon.Common.OpenPGP
 
             pgpSignatureGenerator.InitSign(PgpSignature.BinaryDocument, _encryptionKeys.PrivateKey);
 
-            foreach (string userId in _encryptionKeys.SecretKey.PublicKey.GetUserIds())
+            var userId = _encryptionKeys.SecretKey.PublicKey.GetUserIds().ToList().FirstOrDefault();
+
+            if (userId != null)
             {
                 var subPacketGenerator = new PgpSignatureSubpacketGenerator();
 
                 subPacketGenerator.SetSignerUserId(false, userId);
                 pgpSignatureGenerator.SetHashedSubpackets(subPacketGenerator.Generate());
-
-                // Just the first one!
-                break;
             }
 
             pgpSignatureGenerator.GenerateOnePassVersion(false).Encode(compressedOut);
