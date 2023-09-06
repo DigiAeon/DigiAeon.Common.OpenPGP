@@ -6,13 +6,13 @@ namespace DigiAeon.Common.OpenPGP
 {
     public class PgpService : IPgpService
     {
-        public void EncryptFileAndSign(string inputFilePath, string outputFilePath, string encryptByPublicKeyPath, string signByPrivateKeyFilePath, string signByPrivateKeyPassPhrase, bool useASCIIArmor)
+        public void EncryptFileAndSign(string inputFilePath, string outputFilePath, string encryptByPublicKeyFilePath, string signByPrivateKeyFilePath, string signByPrivateKeyPassPhrase, bool useASCIIArmor)
         {
-            ValidateEncryptFileAndSignParameters(inputFilePath, outputFilePath, encryptByPublicKeyPath, signByPrivateKeyFilePath);
+            ValidateEncryptFileAndSignParameters(inputFilePath, outputFilePath, encryptByPublicKeyFilePath, signByPrivateKeyFilePath);
 
             try
             {
-                PGPProcessor.GetInstance(File.ReadAllBytes(encryptByPublicKeyPath), File.ReadAllBytes(signByPrivateKeyFilePath), signByPrivateKeyPassPhrase)
+                PGPProcessor.GetInstance(File.ReadAllBytes(encryptByPublicKeyFilePath), File.ReadAllBytes(signByPrivateKeyFilePath), signByPrivateKeyPassPhrase)
                     .EncryptFileAndSign(inputFilePath, outputFilePath, armor: useASCIIArmor, withIntegrityCheck: true);
             }
             catch (Exception ex)
@@ -21,13 +21,13 @@ namespace DigiAeon.Common.OpenPGP
             }
         }
 
-        public async Task EncryptFileAndSignAsync(string inputFilePath, string outputFilePath, string encryptByPublicKeyPath, string signByPrivateKeyFilePath, string signByPrivateKeyPassPhrase, bool useASCIIArmor, CancellationToken cancellationToken)
+        public async Task EncryptFileAndSignAsync(string inputFilePath, string outputFilePath, string encryptByPublicKeyFilePath, string signByPrivateKeyFilePath, string signByPrivateKeyPassPhrase, bool useASCIIArmor, CancellationToken cancellationToken)
         {
-            ValidateEncryptFileAndSignParameters(inputFilePath, outputFilePath, encryptByPublicKeyPath, signByPrivateKeyFilePath);
+            ValidateEncryptFileAndSignParameters(inputFilePath, outputFilePath, encryptByPublicKeyFilePath, signByPrivateKeyFilePath);
 
             try
             {
-                var pgp = PGPProcessor.GetInstance(File.ReadAllBytes(encryptByPublicKeyPath), File.ReadAllBytes(signByPrivateKeyFilePath), signByPrivateKeyPassPhrase);
+                var pgp = PGPProcessor.GetInstance(File.ReadAllBytes(encryptByPublicKeyFilePath), File.ReadAllBytes(signByPrivateKeyFilePath), signByPrivateKeyPassPhrase);
 
                 cancellationToken.ThrowIfCancellationRequested();
 
@@ -106,13 +106,13 @@ namespace DigiAeon.Common.OpenPGP
             ValidationHelper.ValidateForRequiredArgument(signByPrivateKey, nameof(signByPrivateKey));
         }
 
-        public void DecryptFileAndVerify(string inputFilePath, string outputFilePath, string verifyByPublicKeyPath, string decryptByPrivateKeyFilePath, string decryptByPrivateKeyPassPhrase)
+        public void DecryptFileAndVerify(string inputFilePath, string outputFilePath, string verifyByPublicKeyFilePath, string decryptByPrivateKeyFilePath, string decryptByPrivateKeyPassPhrase)
         {
-            ValidateDecryptFileAndVerifyParameters(inputFilePath, outputFilePath, verifyByPublicKeyPath, decryptByPrivateKeyFilePath);
+            ValidateDecryptFileAndVerifyParameters(inputFilePath, outputFilePath, verifyByPublicKeyFilePath, decryptByPrivateKeyFilePath);
 
             try
             {
-                PGPProcessor.GetInstance(File.ReadAllBytes(verifyByPublicKeyPath), File.ReadAllBytes(decryptByPrivateKeyFilePath), decryptByPrivateKeyPassPhrase)
+                PGPProcessor.GetInstance(File.ReadAllBytes(verifyByPublicKeyFilePath), File.ReadAllBytes(decryptByPrivateKeyFilePath), decryptByPrivateKeyPassPhrase)
                     .DecryptFileAndVerify(inputFilePath, outputFilePath);
             }
             catch (Exception ex)
@@ -121,13 +121,13 @@ namespace DigiAeon.Common.OpenPGP
             }
         }
 
-        public async Task DecryptFileAndVerifyAsync(string inputFilePath, string outputFilePath, string verifyByPublicKeyPath, string decryptByPrivateKeyFilePath, string decryptByPrivateKeyPassPhrase, CancellationToken cancellationToken)
+        public async Task DecryptFileAndVerifyAsync(string inputFilePath, string outputFilePath, string verifyByPublicKeyFilePath, string decryptByPrivateKeyFilePath, string decryptByPrivateKeyPassPhrase, CancellationToken cancellationToken)
         {
-            ValidateDecryptFileAndVerifyParameters(inputFilePath, outputFilePath, verifyByPublicKeyPath, decryptByPrivateKeyFilePath);
+            ValidateDecryptFileAndVerifyParameters(inputFilePath, outputFilePath, verifyByPublicKeyFilePath, decryptByPrivateKeyFilePath);
 
             try
             {
-                var pgp = PGPProcessor.GetInstance(File.ReadAllBytes(verifyByPublicKeyPath), File.ReadAllBytes(decryptByPrivateKeyFilePath), decryptByPrivateKeyPassPhrase);
+                var pgp = PGPProcessor.GetInstance(File.ReadAllBytes(verifyByPublicKeyFilePath), File.ReadAllBytes(decryptByPrivateKeyFilePath), decryptByPrivateKeyPassPhrase);
 
                 cancellationToken.ThrowIfCancellationRequested();
 
@@ -181,13 +181,13 @@ namespace DigiAeon.Common.OpenPGP
             }
         }
 
-        public async Task<Stream> DecryptFileAndVerifyAsync(string inputFilePath, byte[]? verifyByPublicKey, byte[]? decryptByPrivateKey, string decryptByPrivateKeyPassPhrase, CancellationToken cancellationToken)
+        public async Task<Stream> DecryptFileAndVerifyAsync(string inputFilePath, byte[]? publicPgpKey, byte[]? privatePgpKey, string privatePgpKeyPassphrase, CancellationToken cancellationToken)
         {
-            ValidateDecryptFileAndVerifyParameters(inputFilePath, verifyByPublicKey, decryptByPrivateKey);
+            ValidateDecryptFileAndVerifyParameters(inputFilePath, publicPgpKey, privatePgpKey);
 
             try
             {
-                var pgp = PGPProcessor.GetInstance(verifyByPublicKey, decryptByPrivateKey, decryptByPrivateKeyPassPhrase);
+                var pgp = PGPProcessor.GetInstance(publicPgpKey, privatePgpKey, privatePgpKeyPassphrase);
 
                 cancellationToken.ThrowIfCancellationRequested();
 
